@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const API_SERVER_URL = 'https://finalapi-puce.vercel.app'; // Replace with your actual API server URL
+const SERVER_URL = 'https://finalapi-puce.vercel.app'; // Use a different variable name
 
 export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: API_SERVER_URL,
+    baseUrl: SERVER_URL,
     // Optionally, you can add other default headers, credentials, etc. here
   }),
   tagTypes: ["User"],
@@ -17,4 +17,5 @@ export const apiSlice = createApi({
     // }),
   }),
 });
+
 
