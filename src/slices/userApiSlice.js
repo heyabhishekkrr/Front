@@ -1,12 +1,9 @@
+import { apiSlice } from "./apiSlice";  // Assuming apiSlice is exported correctly from apiSlice.js
+import { logout } from "./authSlice";  // Assuming authSlice is correctly imported
+import { toast } from "react-toastify";  // Assuming react-toastify is correctly imported
+import { API_SERVER_URL } from "./apiConfig";  // Import API_SERVER_URL from apiConfig.js
 
-
-
-
-import { apiSlice } from "./apiSlice";
-import { logout } from "./authSlice";
-import { toast } from "react-toastify";
-
-
+// Define the base URL for user-related API endpoints
 const USERS_URL = `${API_SERVER_URL}/api/users`;
 
 export const userApiSlice = apiSlice.injectEndpoints({
@@ -60,7 +57,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
           dispatch(logout());
           dispatch(apiSlice.util.resetApiState());
         } catch (error) {
-          console.log(error);
+          console.error("Error during logout:", error);
           toast.error("Server Error...");
         }
       },
@@ -84,3 +81,4 @@ export const {
   useSendOTPMutation,
   useUpdatePWDMutation,
 } = userApiSlice;
+
