@@ -6,9 +6,6 @@ import { apiSlice } from "./apiSlice";
 import { logout } from "./authSlice";
 import { toast } from "react-toastify";
 
-const API_SERVER_URL = 'https://finalapi-puce.vercel.app';
-
-const API_SERVER_URL = 'https://api.example.com'; // Replace with your API server URL
 
 const USERS_URL = `${API_SERVER_URL}/api/users`;
 
