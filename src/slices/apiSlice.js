@@ -1,9 +1,4 @@
-// /vercel/path0/src/slices/userApiSlice.js
-
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-// Existing declaration of API_SERVER_URL
-const API_SERVER_URL = 'https://finalapi-puce.vercel.app';
+const API_SERVER_URL = 'https://finalapi-puce.vercel.app/'; // Replace with your API server URL
 
 const USERS_URL = `${API_SERVER_URL}/api/users`;
 
