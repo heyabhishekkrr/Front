@@ -4,10 +4,6 @@
 
 
 
-// Define API_SERVER_URL in a separate file, for example, apiConfig.js
-export const API_SERVER_URL = 'https://finalapi-puce.vercel.app';
-
-
 // In your userApiSlice.js (or any file where you're using API_SERVER_URL)
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_SERVER_URL } from "./apiConfig"; // Adjust the path as per your file structure
