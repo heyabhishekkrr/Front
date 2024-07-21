@@ -17,7 +17,7 @@ const Footer = () => {
                                 <i class="fa-brands fa-linkedin-in"></i>
                             </div>
                         </div>
-                        <div className="col-md-6 col-lg-3 col-12 ft-2">
+                        <div className="col-md-6 col-lg-3 col-12 ft-2 quicklinks">
                             <h5>Quick Links</h5>
                             <ul>
                                 <li className="nav-item">

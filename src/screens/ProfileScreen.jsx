@@ -68,8 +68,9 @@ const ProfileScreen = () => {
         </Form.Group>
 
         <Form.Group className='my-2' controlId='email'>
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label>Email Address (Non Updateable)</Form.Label>
           <Form.Control
+          disabled={true}
             type='email'
             placeholder='Enter Email'
             value={email}

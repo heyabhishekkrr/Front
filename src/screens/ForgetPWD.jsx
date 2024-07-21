@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { Form, Button,Row,Col } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
@@ -24,6 +24,33 @@ const ForgetPWD = () => {
     const [verifyOTP, { isLoading: isVerifyingOTP }] = useVerifyOTPMutation();
     const [updatePWD, { isLoading: isUpdating }] = useUpdatePWDMutation();
 
+    useEffect(() => {
+        let countdownInterval;
+    
+        if (activateButton) {
+          countdownInterval = setInterval(() => {
+            setRemainingTime((prevTime) => {
+              if (prevTime === 0) {
+                clearInterval(countdownInterval);
+                return 0;
+              } else {
+                return prevTime - 1;
+              }
+            });
+          }, 1000); // Update timer every second (1000 milliseconds)
+        }
+    
+        return () => clearInterval(countdownInterval);
+      }, [activateButton]);
+    const handleActivate = () => {
+        setActivateButton(false);
+        setRemainingTime(59);
+        setTimeout(() => {
+            setActivateButton(true);
+        }, 59000); // 59000 milliseconds (59 seconds)
+    };
+
+
     const handleSendOTP = async () => {
         try {
             const response = await sendOTP({ email });
@@ -43,7 +70,7 @@ const ForgetPWD = () => {
         try {
             const response = await verifyOTP({ email, otp });
             if (response.error) {
-                toast.error(response.error.message);
+                toast.error(response.error?.data?.message || "Invalid login");
             } else {
                 setOtpVerified(true);
                 toast.success("OTP verified successfully!");
@@ -75,17 +102,10 @@ const ForgetPWD = () => {
         }
     };
 
-    const handleActivate = () => {
-        setActivateButton(true);
-        setRemainingTime(59);
-        setTimeout(() => {
-            setActivateButton(false);
-        }, 59000); // 59000 milliseconds (59 seconds)
-    };
-
+  
     let buttonText = isVerifyingOTP ? <Loader /> : otpVerified ? "Verified" : "Verify";
 
-    let btnOfResend = isSendingOTP ? <Loader /> : remainingTime > 0 ? `Resend in ${remainingTime}s` : "Resend Email OTP";
+    let btnOfResend = isSendingOTP ? <Loader /> : remainingTime > 1 ? `Resend in ${remainingTime}s` : "Resend Email OTP";
 
     return (
         <FormContainer>
@@ -132,7 +152,7 @@ const ForgetPWD = () => {
                                     onClick={handleSendOTP}
                                     variant="secondary"
                                     style={{ margin: "2px" }}
-                                    disabled={remainingTime > 0}
+                                    disabled={remainingTime > 1}
                                 >
                                     {btnOfResend}
                                 </Button>
