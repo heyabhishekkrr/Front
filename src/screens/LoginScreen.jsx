@@ -23,6 +23,8 @@ const LoginScreen = () => {
   const loginUser = async () => {
     try {
       const res = await login({ email, password }).unwrap();
+     await console.log(res);
+     toast.error(res)
       dispatch(setCredentials({ ...res }));
       navigate("/dashboard");
     } catch (error) {

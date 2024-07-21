@@ -3,7 +3,7 @@ import { logout } from "./authSlice";
 import { toast } from "react-toastify";
 
 
-const USERS_URL = "https://finalapi-puce.vercel.app/";
+const USERS_URL = "https://finalapi-puce.vercel.app/sendOTP/api/users";
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

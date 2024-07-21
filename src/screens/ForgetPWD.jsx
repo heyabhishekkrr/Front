@@ -6,6 +6,7 @@ import { useUpdatePWDMutation, useSendOTPMutation, useVerifyOTPMutation } from "
 import FormContainer from "../components/FormContainer";
 import Loader from "../components/Loader";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector} from "react-redux";
 
 
 const ForgetPWD = () => {
@@ -49,7 +50,12 @@ const ForgetPWD = () => {
             setActivateButton(true);
         }, 59000); // 59000 milliseconds (59 seconds)
     };
-
+    const { userInfo } = useSelector((state) => state.auth);
+    useEffect(() => {
+        if (userInfo) {
+          navigate("/profile");
+        }
+      }, [navigate, userInfo]);
 
     const handleSendOTP = async () => {
         try {
