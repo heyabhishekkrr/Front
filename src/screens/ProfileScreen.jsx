@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form,} from "react-bootstrap";
 import { toast } from "react-toastify";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setCredentials } from "../slices/authSlice";
-import { useUpdateProfileMutation } from "../slices/userApiSlice";
+// import { setCredentials } from "../slices/authSlice";
+// import { useUpdateProfileMutation } from "../slices/userApiSlice";
 
 import FormContainer from "../components/FormContainer";
-import Loader from "../components/Loader";
+// import Loader from "../components/Loader";
 
 
 const ProfileScreen = () => {
@@ -19,33 +19,9 @@ const ProfileScreen = () => {
   const dispatch = useDispatch();
 
   const { userInfo } = useSelector((state) => state.auth);
-  const [update, { isLoading }] = useUpdateProfileMutation();
+  
 
-  const updateProfile = async () => {
-    try {
-      const res = await update({
-        _id: userInfo._id,
-        name,
-        email,
-        password,
-      }).unwrap();
-   
-        toast.success("Sucessfully Updated!");
-      dispatch(setCredentials({ ...res }));
-    } catch (error) {
-      toast.error(error?.data?.message || "Invalid login");
-    }
-  };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-
-    if (password !== confirmPassword) {
-      toast.error("Password is not matching!");
-    } else {
-      updateProfile();
-    }
-  };
 
   useEffect(() => {
     setName(userInfo.name);
@@ -54,12 +30,13 @@ const ProfileScreen = () => {
 
   return (
     <FormContainer>
-      <h1>Update Profile</h1>
+      <h1>Profile</h1>
 
-      <Form onSubmit={submitHandler}>
+      <Form >
         <Form.Group className='my-2' controlId='name'>
           <Form.Label>Name</Form.Label>
           <Form.Control
+          disabled={true}
             type='name'
             placeholder='Enter Name'
             value={name}
@@ -68,7 +45,7 @@ const ProfileScreen = () => {
         </Form.Group>
 
         <Form.Group className='my-2' controlId='email'>
-          <Form.Label>Email Address (Non Updateable)</Form.Label>
+          <Form.Label>Email Address </Form.Label>
           <Form.Control
           disabled={true}
             type='email'
@@ -78,29 +55,8 @@ const ProfileScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group className='my-2' controlId='password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Enter Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+       
 
-        <Form.Group className='my-2' controlId='confirmPassword'>
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Confirm Password'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-
-        <Button type='submit' variant='primary' className='mt-3'>
-          {isLoading ? <Loader /> : "Update"}
-        </Button>
       </Form>
     </FormContainer>
   );

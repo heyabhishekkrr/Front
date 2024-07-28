@@ -3,7 +3,7 @@ import { logout } from "./authSlice";
 import { toast } from "react-toastify";
 
 
-const USERS_URL = "https://finalapi-puce.vercel.app/sendOTP/api/users";
+const USERS_URL = "https://finalapi-puce.vercel.app/api/users";
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -17,6 +17,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
     register: builder.mutation({
       query: (data) => ({
         url: `${USERS_URL}/register`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+    contact: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/contact`,
         method: "POST",
         body: data,
       }),
@@ -82,4 +89,5 @@ export const {
   useVerifyOTPMutation,
   useSendOTPMutation,
   useUpdatePWDMutation,
+  useContactMutation,
 } = userApiSlice;

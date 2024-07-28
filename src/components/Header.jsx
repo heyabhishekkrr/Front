@@ -28,12 +28,16 @@ const Header = () => {
           <LinkContainer to='/dashboard'>
             <Nav.Link>Dashboard</Nav.Link>
           </LinkContainer>
+          <LinkContainer to='/contact'>
+            <Nav.Link>Contact</Nav.Link>
+          </LinkContainer>
           <NavDropdown title={userInfo.name} id='username'>
             <LinkContainer to='/profile'>
               <NavDropdown.Item>Profile</NavDropdown.Item>
             </LinkContainer>
             <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
           </NavDropdown>
+        
         </>
       );
     } else {
@@ -49,6 +53,9 @@ const Header = () => {
             <Nav.Link>
               <FaSignOutAlt /> Sign Up
             </Nav.Link>
+          </LinkContainer>
+          <LinkContainer to='/contact'>
+            <Nav.Link>Contact</Nav.Link>
           </LinkContainer>
         </>
       );

@@ -26,6 +26,7 @@ import Error from "./components/Error";
 
 
 import PrivateRoute from "./components/PrivateRoute";
+import Contact from "./components/Contact.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,7 +40,7 @@ const router = createBrowserRouter(
       <Route path='register' element={<RegisterScreen />} />
       <Route path='pwd' element={<PasswordFinder />} />
       <Route path='frgtpwd' element={<ForgetPWD/>} />
-
+      <Route path="contact" element={<Contact/>}/>
 
       <Route element={<PrivateRoute />}>
         <Route path='profile' element={<ProfileScreen />} />
